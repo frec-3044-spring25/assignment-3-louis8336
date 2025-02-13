@@ -1,6 +1,6 @@
 ---
 title: "Climate Change Module"
-author: 'Add name'
+author: 'Louis Hedges'
 format:
   html:
     embed-resources: true
@@ -44,13 +44,18 @@ ggplot(co2, aes(x = decimal_date, y = monthly_average)) +
 Describe the overall trend in the CO2 data.
 
 **Answer 1:**
-
+Looking at the data we can see there is clearly a positive correlation. An increase in the years will show there is an increase in CO2 concentration. 
 **Question 2:**
 
 How does CO2 vary within a year?  What month is it at max?  Min?  What might explain this sub-annual pattern? (you will need to write code and make a plot to answer this question)
 
 **Answer 2:**
-
+year <- co2 |> filter(year == 1958)
+ggplot(year, aes(x = month, y = monthly_average)) + 
+  geom_line() + 
+  labs(x = "Month", y = "CO2 concentration (ppm)")
+  
+We can see that the highest month is the 5th month with a value of 317.5. With the data year being 1958. The sub annual pattern could be due to the weather change in the later parts of the year. 
 
 
 ## Global Temperature Data
@@ -70,7 +75,7 @@ Describe the data set to the best of your ability, given the documentation provi
 - What is the difference between "global temperature" and "global temperature anomaly"? 
 
 **Answer 3:**
-
+This data set shows the year from 1880 to 2020, and shows the corresponding temperature anomaly in celsius. This helps identify global warming on teh surface level. The data is from NASA and their analysis on the topic. The are 3 columns the first one being year. The second one being no_smoothing and the third being Lowess(5). The difference is global temperature and global temperature anomaly is that global temperature is that global temperature is the total temp. However anomaly is the deviation from the global temp. In other words how much it has chnaged. 
 
 **Question 4:**
 
@@ -79,6 +84,12 @@ Construct the necessary R code to import and prepare for plotting the following 
 You'll need to determine the file's delimiter and any comments or skips. You will also need to be sure that you have column names. You will not directly use the code above to read the CO2 data, but that code provides helpful tips for reading the data.
 
 **Answer 4:**
+Q4_table <-  read_table("https://data.giss.nasa.gov/gistemp/graphs/graph_data/Global_Mean_Estimates_based_on_Land_and_Ocean_Data/graph.txt", 
+                  comment="#",
+                  col_names = c("year", "No Smoothing", "Lowess")
+                   na = c("-1", "-99.99"))
+
+
 
 **Question 5:**
 
