@@ -45,6 +45,7 @@ Describe the overall trend in the CO2 data.
 
 **Answer 1:**
 Looking at the data we can see there is clearly a positive correlation. An increase in the years will show there is an increase in CO2 concentration. 
+
 **Question 2:**
 
 How does CO2 vary within a year?  What month is it at max?  Min?  What might explain this sub-annual pattern? (you will need to write code and make a plot to answer this question)
@@ -75,7 +76,7 @@ Describe the data set to the best of your ability, given the documentation provi
 - What is the difference between "global temperature" and "global temperature anomaly"? 
 
 **Answer 3:**
-This data set shows the year from 1880 to 2020, and shows the corresponding temperature anomaly in celsius. This helps identify global warming on teh surface level. The data is from NASA and their analysis on the topic. The are 3 columns the first one being year. The second one being no_smoothing and the third being Lowess(5). The difference is global temperature and global temperature anomaly is that global temperature is that global temperature is the total temp. However anomaly is the deviation from the global temp. In other words how much it has chnaged. 
+This data set shows the year from 1880 to 2020, and shows the corresponding temperature anomaly in celsius. This helps identify global warming on teh surface level. The data is from NASA and their analysis on the topic. The are 3 columns the first one being year. The second one being no_smoothing and the third being Lowess(5). The difference is global temperature and global temperature anomaly is that global temperature is that global temperature is the total temp. However anomaly is the deviation from the global temp. In other words how much it has changed. 
 
 **Question 4:**
 
@@ -84,12 +85,7 @@ Construct the necessary R code to import and prepare for plotting the following 
 You'll need to determine the file's delimiter and any comments or skips. You will also need to be sure that you have column names. You will not directly use the code above to read the CO2 data, but that code provides helpful tips for reading the data.
 
 **Answer 4:**
-Q4_table <-  read_table("https://data.giss.nasa.gov/gistemp/graphs/graph_data/Global_Mean_Estimates_based_on_Land_and_Ocean_Data/graph.txt", 
-                  comment="#",
-                  col_names = c("year", "No Smoothing", "Lowess")
-                   na = c("-1", "-99.99"))
-
-
+Q4_table <-  read_table("https://data.giss.nasa.gov/gistemp/graphs/graph_data/Global_Mean_Estimates_based_on_Land_and_Ocean_Data/graph.txt")
 
 **Question 5:**
 
@@ -97,7 +93,11 @@ Plot the trend in global mean temperatures over time.  Describe what you see in 
 
 **Answer 5:**
 
-## Evaluating the evidence for a "Pause" in warming?
+plot(Q4_table$"Land-Ocean", Q4_table$"Temperature", 
+xlab = "Year", ylab = "Global Mean Temperature (°C)",
+     main = "Global Mean Temperature Trend Over Years")
+     
+# The plot shows a positive correlation starting from the year 1880 all the way to 2020. 
 
 The [2013 IPCC Report](https://www.ipcc.ch/pdf/assessment-report/ar5/wg1/WG1AR5_SummaryVolume_FINAL.pdf) included a tentative observation of a "much smaller increasing trend" in global mean temperatures since 1998 than was observed previously.  This led to much discussion in the media about the existence of a "Pause" or "Hiatus" in global warming rates, as well as much research looking into where the extra heat could have gone.  (Examples discussing this question include articles in [The Guardian](http://www.theguardian.com/environment/2015/jun/04/global-warming-hasnt-paused-study-finds), [BBC News](http://www.bbc.com/news/science-environment-28870988), and [Wikipedia](https://en.wikipedia.org/wiki/Global_warming_hiatus)). 
 
@@ -109,6 +109,8 @@ Use a search engine (e.g., Google) or a chat LLM to find out how to calculate a 
 
 **Answer 6:**
 
+I used ChatGPT to do this research, in doing so it told me to use the zoo package, this would allow me to use the rollmean() function. However a paramter k is needed to give the amount of years. 
+
 **Question 7:**
 
 - What is the meaning of "5-year average" vs. "annual average"?
@@ -116,11 +118,28 @@ Use a search engine (e.g., Google) or a chat LLM to find out how to calculate a 
 
 **Answer 7:**
 
+# The meaning of a 5 year average is: the average calculated over 5 consecutive years. Also it is often updated each year.
+
+# The meaning of an annual average is: the average value calculated for a single year. 
+install.packages("zoo")
+library(zoo)
+
+plot(Q4_table$"Land-Ocean", Q4_table$"Temperature", 
+xlab = "Year", ylab = "Global Mean Temperature (°C)",
+     main = "Global Mean Temperature Trend Over Years")
+
+
 **Question 8:**
 
 Plot the different averages on the *same plot* and describe what differences you see and why.  
 
 **Answer 8:**
+
+
+
+
+
+
 
 **Question 9:**
 
