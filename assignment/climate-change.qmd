@@ -87,14 +87,16 @@ Construct the necessary R code to import and prepare for plotting the following 
 You'll need to determine the file's delimiter and any comments or skips. You will also need to be sure that you have column names. You will not directly use the code above to read the CO2 data, but that code provides helpful tips for reading the data.
 
 **Answer 4:**
+```{r}
 Q4_table <-  read_table("https://data.giss.nasa.gov/gistemp/graphs/graph_data/Global_Mean_Estimates_based_on_Land_and_Ocean_Data/graph.txt")
+```
 
 **Question 5:**
 
 Plot the trend in global mean temperatures over time.  Describe what you see in the plot and how you interpret the patterns you observe.
 
 **Answer 5:**
-```{r}
+```{r} 
 plot(Q4_table$"Land-Ocean", Q4_table$"Temperature", 
 xlab = "Year", ylab = "Global Mean Temperature (°C)",
      main = "Global Mean Temperature Trend Over Years")
@@ -125,9 +127,10 @@ I used ChatGPT to do this research, in doing so it told me to use the zoo packag
 
 # The meaning of an annual average is: the average value calculated for a single year. 
 
-install.packages("zoo")
+#install.packages("zoo")
 library(zoo)
 
+Q4_Table_New <- Q4_table
 Q4_Table_New$Temperature <- as.numeric(Q4_Table_New$Temperature)
 
 Q4_Table_New <- Q4_Table_New[-c(1:3), ]
