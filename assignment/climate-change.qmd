@@ -124,9 +124,19 @@ I used ChatGPT to do this research, in doing so it told me to use the zoo packag
 install.packages("zoo")
 library(zoo)
 
-plot(Q4_table$"Land-Ocean", Q4_table$"Temperature", 
+Q4_Table_New$Temperature <- as.numeric(Q4_Table_New$Temperature)
+
+Q4_Table_New <- Q4_table[-c(1:3), ] #I had to remove the first 3 rows due to the rollmean function not working with NA values. The rows weren't the same and had to be. 
+
+plot(Q4_Table_New$"Land-Ocean", Q4_Table_New$"Temperature", 
 xlab = "Year", ylab = "Global Mean Temperature (°C)",
      main = "Global Mean Temperature Trend Over Years")
+
+Q4_Table_New$Average_5 <- rollmean(Q4_Table_New$Temperature, k = 5, fill = NA, align = "right")
+
+Q4_Table_New$Average_10 <- rollmean(Q4_Table_New$Temperature, k = 10, fill = NA, align = "right")
+
+Q4_Table_New$Average_20 <- rollmean(Q4_Table_New$Temperature, k = 20, fill = NA, align = "right")
 
 
 **Question 8:**
@@ -135,11 +145,15 @@ Plot the different averages on the *same plot* and describe what differences you
 
 **Answer 8:**
 
+plot(Q4_Table_New$"Land-Ocean", Q4_Table_New$"Temperature", 
+xlab = "Year", ylab = "Global Mean Temperature (°C)",
+     main = "Global Mean Temperature Trend Over Years")
 
+lines(Q4_Table_New$"Land-Ocean", Q4_Table_New$Average_5, col = "Red", lwd = 2)
+lines(Q4_Table_New$"Land-Ocean", Q4_Table_New$Average_10, col = "Green", lwd = 2)
+lines(Q4_Table_New$"Land-Ocean", Q4_Table_New$Average_20, col = "Blue", lwd = 2)
 
-
-
-
+All the lines are extremely similar to each other and follow the positive correlation of the averages throughout. The biggest difference I noticed is with the blue line (Which is 20 years average), this shows a slightly more shallow line underneath the others and underneath the averages.  
 
 **Question 9:**
 
