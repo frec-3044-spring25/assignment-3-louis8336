@@ -97,7 +97,7 @@ plot(Q4_table$"Land-Ocean", Q4_table$"Temperature",
 xlab = "Year", ylab = "Global Mean Temperature (°C)",
      main = "Global Mean Temperature Trend Over Years")
      
-# The plot shows a positive correlation starting from the year 1880 all the way to 2020. 
+The plot shows a positive correlation starting from the year 1880 all the way to 2020. 
 
 The [2013 IPCC Report](https://www.ipcc.ch/pdf/assessment-report/ar5/wg1/WG1AR5_SummaryVolume_FINAL.pdf) included a tentative observation of a "much smaller increasing trend" in global mean temperatures since 1998 than was observed previously.  This led to much discussion in the media about the existence of a "Pause" or "Hiatus" in global warming rates, as well as much research looking into where the extra heat could have gone.  (Examples discussing this question include articles in [The Guardian](http://www.theguardian.com/environment/2015/jun/04/global-warming-hasnt-paused-study-finds), [BBC News](http://www.bbc.com/news/science-environment-28870988), and [Wikipedia](https://en.wikipedia.org/wiki/Global_warming_hiatus)). 
 
@@ -118,9 +118,10 @@ I used ChatGPT to do this research, in doing so it told me to use the zoo packag
 
 **Answer 7:**
 
-# The meaning of a 5 year average is: the average calculated over 5 consecutive years. Also it is often updated each year.
+The meaning of a 5 year average is: the average calculated over 5 consecutive years. Also it is often updated each year.
 
-# The meaning of an annual average is: the average value calculated for a single year. 
+The meaning of an annual average is: the average value calculated for a single year. 
+
 install.packages("zoo")
 library(zoo)
 
