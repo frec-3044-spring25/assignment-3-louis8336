@@ -161,6 +161,9 @@ By examining the data here, what evidence do you find or not find for such a pau
 
 **Answer 9:**
 
+Looking at the table, in my opinion I don't see a "pause" within the temperature rising. It has been dramatically increasing more since the year 1980. And with the provided data I don't expect it to slow down or for a pause to happen in the upcoming years. 
+
+
 ## Longer term trends in CO2 Records
 
 When analyzing Earth’s climate, it is important to remember that Earth is 4.54 billion years old. Our analyses so far have only looked at recent history. How can we compare the recent data to prehistoric times? Are the current rates of change similar or different from those the earth has experienced in the past? To explore this, we can use data from ice cores drilled at the poles. 
@@ -201,7 +204,20 @@ Your answer to Question 10 is going to be a mix of code chunks and text that you
 
 **Answer 10:**
 
+The data set shows 4 columns, Depth(M), Age of the ice (yr BP), mean age of the air (yr BP), CO2 concentration (PPMV). The data is from January 2003.
+
+
 ```{r}
+Q10_Table <- read_table("https://data.ess-dive.lbl.gov/catalog/d1/mn/v2/object/ess-dive-457358fdc81d3a5-20180726T203952542", skip = 1, 
+                          col_names = c("Depth M", "Age of the Ice Yr BP", "Mean age of the air yr BP", "CO2 Concentration PPMV"), comment = "#")
+
+Q10_Table <- Q10_Table %>%
+  mutate(across(everything(), as.numeric))
+
+Q10_Table <- Q10_Table[complete.cases(Q10_Table), ]
+
+glimpse(Q10_Table)
+
 
 
 ```
@@ -214,5 +230,19 @@ Remember to Render your document as HTML and comment+push to GitHub your code an
 
 Include citation of any AI-generated assistance or discussion with classmates (per policy in syllabus). Proper documentation of AI-generated assistance includes the prompt, the source (e.g., ChatGPT), and the significant parts of the response.  Proper documentation of discussion with classmates include listing their names and the components discussed.  
 
+### Lines 214 - 219 I used chatgpt to help debug the dataset and remove the beginning points of data that were chr data points rather than numeric. Also the columns were not aligned and when I used the read_table function the columns were shown vertically rather than horizontally which R would not read. 
 
+### AI Assistence Documented 
 
+### Prompt : "Q10_Table <- read_table(...) is giving me an error. How can I fix this specifc error to do with column specification and clean the data properly?"
+
+### Source : ChatGPT by OpenAI
+
+### Response Used : Lines 214-219
+
+# Q10_Table <- Q10_Table %>%
+# mutate(across(everything(), as.numeric))
+# Q10_Table <- Q10_Table[complete.cases(Q10_Table), ]
+# glimpse(Q10_Table)
+
+# Date: February 18th, 2025
