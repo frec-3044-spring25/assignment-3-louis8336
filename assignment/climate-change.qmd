@@ -196,7 +196,7 @@ Your answer to Question 10 is going to be a mix of code chunks and text that you
 - Describe the data set: what are the columns and units? Where do the numbers come from? 
 - What is the temporal resolution of the data? 
 - Read in and prepare data for analysis.   
-- Reverse the ordering to create a chronological record so that each measurement is associcated with calender year.
+- Reverse the ordering to create a chronological record so that each measurement is associated with calender year.
 - Plot data.  
 - Combine this time series with the Mauna Loa data (the Warm-up exercise in this assignment).  You will use "bind_rows()".
 - Plot the combined data. (the most recent time period must be on the right side of the plot).        
@@ -218,6 +218,27 @@ Q10_Table <- Q10_Table[complete.cases(Q10_Table), ]
 
 glimpse(Q10_Table)
 
+Q10_Table <- Q10_Table %>%
+  mutate(year = 1950 - `Mean age of the air yr BP`) 
+
+Q10_Table <- Q10_Table %>%
+  arrange(year)
+
+Mauna_Loa_Data <- co2
+
+
+combined_plot <- bind_rows(
+  Q10_Table %>% select(year, `CO2 Concentration PPMV`),
+  Mauna_Loa_Data %>% rename(`CO2 Concentration PPMV` = monthly_average) %>% select(year, `CO2 Concentration PPMV`)
+)
+
+ggplot(combined_plot, aes(x = year, y = `CO2 Concentration PPMV`)) +
+  geom_line() +
+  labs(title = "CO2 Concentration Comparison",
+       x = "Year",
+       y = "CO2 Concentration PPMV")
+
+# Using my plot and using my new combined data table. I can see that recent CO2 levels are significantly higher than historic levels. Looking at the plot we can see that historic levels of CO2 ranged between 180 - 300 PPMV during certain periods. However in recent times there has been a significant increase which shows the levels of PPMV increase to roughly 420 PPMV. 
 
 
 ```
@@ -232,7 +253,7 @@ Include citation of any AI-generated assistance or discussion with classmates (p
 
 ### Lines 214 - 219 I used chatgpt to help debug the dataset and remove the beginning points of data that were chr data points rather than numeric. Also the columns were not aligned and when I used the read_table function the columns were shown vertically rather than horizontally which R would not read. 
 
-### AI Assistence Documented 
+### AI Assistance Documented 
 
 ### Prompt : "Q10_Table <- read_table(...) is giving me an error. How can I fix this specifc error to do with column specification and clean the data properly?"
 
